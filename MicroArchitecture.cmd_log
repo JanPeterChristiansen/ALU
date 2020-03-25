@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "C:/Users/japem/Documents/VHDL/MicroArchitecture/MicroArchitecture.xst" -ofn "C:/Users/japem/Documents/VHDL/MicroArchitecture/MicroArchitecture.syr" 
