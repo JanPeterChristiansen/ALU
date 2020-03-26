@@ -56,14 +56,14 @@ ARCHITECTURE behavior OF TestBench IS
     
 
    --Inputs
-   signal CLK : std_logic := '0';
-   signal A : std_logic_vector(3 downto 0) := x"1";
-   signal B : std_logic_vector(3 downto 0) := x"3";
-   signal INVA : std_logic := '0';
-   signal ENA : std_logic := '1';
-   signal ENB : std_logic := '0';
-   signal INC : std_logic := '0';
-   signal F : std_logic_vector(1 downto 0) := "00";
+   signal CLK 		: std_logic 							:= '0';
+   signal A 		: std_logic_vector(3 downto 0) 	:= x"1"; 	-- set value for A
+   signal B 		: std_logic_vector(3 downto 0) 	:= x"3"; 	-- set value for B
+   signal INVA 	: std_logic 							:= '0'; 		-- invert A
+   signal ENA 		: std_logic 							:= '1';		-- enable A
+   signal ENB 		: std_logic 							:= '0';		-- enable B
+   signal INC 		: std_logic 							:= '0';		-- increment
+   signal F 		: std_logic_vector(1 downto 0) 	:= "00"; 	-- function select
 
  	--Outputs
    signal OUTPUT : std_logic_vector(3 downto 0);

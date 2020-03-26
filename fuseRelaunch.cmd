@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_isim_beh.exe" -prj "C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_beh.prj" "work.TestBench" 

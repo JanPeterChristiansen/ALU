@@ -1,0 +1,4 @@
+work	"Adder.vhd"
+work	"FourBitALU.vhd"
+work	"InputSelect.vhd"
+work	"OutputSelect.vhd"
