@@ -1,4 +1,4 @@
-Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib secureip -o C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_isim_beh.exe -prj C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_beh.prj work.TestBench 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_isim_beh.exe" -prj "C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_beh.prj" "work.TestBench" 
 ISim P.20131013 (signature 0x7708f090)
 Number of CPUs detected in this system: 12
 Turning on mult-threading, number of parallel sub-compilation jobs: 24 
@@ -7,6 +7,8 @@ Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/OutputSelect.
 Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/InputSelect.vhd" into library work
 Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/Adder.vhd" into library work
 Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/FourBitALU.vhd" into library work
+Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/ALUController.vhd" into library work
+Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/CPU.vhd" into library work
 Parsing VHDL file "C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench.vhd" into library work
 Starting static elaboration
 Completed static elaboration
@@ -14,15 +16,16 @@ Compiling package standard
 Compiling package std_logic_1164
 Compiling package std_logic_arith
 Compiling package std_logic_unsigned
+Compiling architecture behavioral of entity ALUController [alucontroller_default]
 Compiling package numeric_std
 Compiling architecture behavioral of entity InputSelect [inputselect_default]
 Compiling architecture behavioral of entity Adder [adder_default]
 Compiling architecture behavioral of entity OutputSelect [outputselect_default]
-Compiling architecture behavioral of entity FourBitALU [fourbitalu_default]
+Compiling architecture behavioral of entity EightBitALU [eightbitalu_default]
+Compiling architecture behavioral of entity CPU [cpu_default]
 Compiling architecture behavior of entity testbench
 Time Resolution for simulation is 1ps.
-Waiting for 1 sub-compilation(s) to finish...
-Compiled 14 VHDL Units
+Compiled 18 VHDL Units
 Built simulation executable C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench_isim_beh.exe
-Fuse Memory Usage: 36432 KB
-Fuse CPU Usage: 1702 ms
+Fuse Memory Usage: 37456 KB
+Fuse CPU Usage: 1452 ms

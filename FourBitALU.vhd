@@ -30,27 +30,26 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FourBitALU is
+entity EightBitALU is
    Port ( 
-		CLK 		: in 		STD_LOGIC;	
-		A 			: in  	STD_LOGIC_VECTOR (3 downto 0);
-		B 			: in  	STD_LOGIC_VECTOR (3 downto 0);
+		A 			: in  	STD_LOGIC_VECTOR (7 downto 0);
+		B 			: in  	STD_LOGIC_VECTOR (7 downto 0);
 		INVA 		: in  	STD_LOGIC;  
       ENA 		: in 		STD_LOGIC; 
 		ENB 		: in 		STD_LOGIC;
 		INC 		: in 		STD_LOGIC;
 		F 			: in  	STD_LOGIC_VECTOR (1 downto 0);
-		OUTPUT 	: out  	STD_LOGIC_VECTOR (3 downto 0);
+		OUTPUT 	: out  	STD_LOGIC_VECTOR (7 downto 0);
 		CARRY 	: out 	STD_LOGIC
 	);
 	
-end FourBitALU;
+end EightBitALU;
 
-architecture Behavioral of FourBitALU is
+architecture Behavioral of EightBitALU is
 
-	signal QA 	: STD_LOGIC_VECTOR (3 downto 0);
-	signal QB 	: STD_LOGIC_VECTOR (3 downto 0);
-	signal SUM 	: STD_LOGIC_VECTOR (3 downto 0);
+	signal QA 	: STD_LOGIC_VECTOR (7 downto 0);
+	signal QB 	: STD_LOGIC_VECTOR (7 downto 0);
+	signal SUM 	: STD_LOGIC_VECTOR (7 downto 0);
 
 begin
 

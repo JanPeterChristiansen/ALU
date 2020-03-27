@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   17:01:17 03/25/2020
+-- Create Date:   12:24:05 03/27/2020
 -- Design Name:   
 -- Module Name:   C:/Users/japem/Documents/VHDL/MicroArchitecture/TestBench.vhd
 -- Project Name:  MicroArchitecture
@@ -10,7 +10,7 @@
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: FourBitALU
+-- VHDL Test Bench Created by ISE for module: CPU
 -- 
 -- Dependencies:
 -- 
@@ -39,35 +39,19 @@ ARCHITECTURE behavior OF TestBench IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT FourBitALU
+    COMPONENT CPU
     PORT(
          CLK : IN  std_logic;
-         A : IN  std_logic_vector(3 downto 0);
-         B : IN  std_logic_vector(3 downto 0);
-         INVA : IN  std_logic;
-         ENA : IN  std_logic;
-         ENB : IN  std_logic;
-         INC : IN  std_logic;
-         F : IN  std_logic_vector(1 downto 0);
-         OUTPUT : OUT  std_logic_vector(3 downto 0);
-         CARRY : OUT  std_logic
+         LED : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal CLK 		: std_logic 							:= '0';
-   signal A 		: std_logic_vector(3 downto 0) 	:= x"1"; 	-- set value for A
-   signal B 		: std_logic_vector(3 downto 0) 	:= x"3"; 	-- set value for B
-   signal INVA 	: std_logic 							:= '0'; 		-- invert A
-   signal ENA 		: std_logic 							:= '1';		-- enable A
-   signal ENB 		: std_logic 							:= '0';		-- enable B
-   signal INC 		: std_logic 							:= '0';		-- increment
-   signal F 		: std_logic_vector(1 downto 0) 	:= "00"; 	-- function select
+   signal CLK : std_logic := '0';
 
  	--Outputs
-   signal OUTPUT : std_logic_vector(3 downto 0);
-   signal CARRY : std_logic;
+   signal LED : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant CLK_period : time := 10 ns;
@@ -75,17 +59,9 @@ ARCHITECTURE behavior OF TestBench IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: FourBitALU PORT MAP (
+   uut: CPU PORT MAP (
           CLK => CLK,
-          A => A,
-          B => B,
-          INVA => INVA,
-          ENA => ENA,
-          ENB => ENB,
-          INC => INC,
-          F => F,
-          OUTPUT => OUTPUT,
-          CARRY => CARRY
+          LED => LED
         );
 
    -- Clock process definitions

@@ -30,13 +30,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity InputSelect is
-    Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
+    Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
            ENA : in  STD_LOGIC;
            INVA : in  STD_LOGIC;
-           B : in  STD_LOGIC_VECTOR (3 downto 0);
+           B : in  STD_LOGIC_VECTOR (7 downto 0);
            ENB : in  STD_LOGIC;
-           QA : out  STD_LOGIC_VECTOR (3 downto 0);
-           QB : out  STD_LOGIC_VECTOR (3 downto 0));
+           QA : out  STD_LOGIC_VECTOR (7 downto 0);
+           QB : out  STD_LOGIC_VECTOR (7 downto 0));
 end InputSelect;
 
 architecture Behavioral of InputSelect is
@@ -55,16 +55,16 @@ BSEL <= ENB;
 
 
 with ASEL select
-	QA <= 	x"0" 	when "00",
-				A 		when "01",
-				x"f" 	when "10",
-				not A when "11",
-				x"0" 	when others;
+	QA <= 	x"00" 	when "00",
+				A 			when "01",
+				x"ff" 	when "10",
+				not A 	when "11",
+				x"00" 	when others;
 
 with BSEL select
-	QB <= 	x"0" 	when '0',
-				B 	when '1',
-				x"0" 	when others;
+	QB <= 	x"00" 	when '0',
+				B 			when '1',
+				x"00" 	when others;
 
 
 

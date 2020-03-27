@@ -32,29 +32,29 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Adder is
-    Port ( A 		: in  STD_LOGIC_VECTOR (3 downto 0);
-           B 		: in  STD_LOGIC_VECTOR (3 downto 0);
+    Port ( A 		: in  STD_LOGIC_VECTOR (7 downto 0);
+           B 		: in  STD_LOGIC_VECTOR (7 downto 0);
            INC 	: in  STD_LOGIC;
-           SUM 	: out STD_LOGIC_VECTOR (3 downto 0);
+           SUM 	: out STD_LOGIC_VECTOR (7 downto 0);
 			  CARRY 	: out STD_LOGIC);
 end Adder;
 
 architecture Behavioral of Adder is
 
-	signal tempSUM : STD_LOGIC_VECTOR (4 downto 0);
-	signal tempA 	: STD_LOGIC_VECTOR (4 downto 0) := "00000";
-	signal tempB 	: STD_LOGIC_VECTOR (4 downto 0) := "00000";
-	signal tempINC : STD_LOGIC_VECTOR (4 downto 0) := "00000";
+	signal tempSUM : STD_LOGIC_VECTOR (8 downto 0);
+	signal tempA 	: STD_LOGIC_VECTOR (8 downto 0) := "000000000";
+	signal tempB 	: STD_LOGIC_VECTOR (8 downto 0) := "000000000";
+	signal tempINC : STD_LOGIC_VECTOR (8 downto 0) := "000000000";
 
 begin
 
-	tempA(3 downto 0) <= A;
-	tempB(3 downto 0) <= B;
+	tempA(7 downto 0) <= A;
+	tempB(7 downto 0) <= B;
 	tempINC(0) <= INC;
 	
 	tempSUM <= tempA + tempB + tempINC;
-	SUM <= tempSUM(3 downto 0);
-	CARRY <= tempSUM(4);
+	SUM <= tempSUM(7 downto 0);
+	CARRY <= tempSUM(8);
 
 end Behavioral;
 

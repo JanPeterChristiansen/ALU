@@ -1,4 +1,6 @@
+work	"ALUController.vhd"
 work	"Adder.vhd"
+work	"CPU.vhd"
 work	"FourBitALU.vhd"
 work	"InputSelect.vhd"
 work	"OutputSelect.vhd"
