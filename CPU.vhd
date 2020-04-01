@@ -55,25 +55,61 @@ architecture Behavioral of CPU is
 -- ALU control signals
 
 	signal ALUControlBus : STD_LOGIC_VECTOR (5 downto 0) := "000000";
+	signal ALUfunc			: STD_LOGIC_VECTOR (7 downto 0) := x"00";
 	signal ALUcarry		: STD_LOGIC;
 	
 	
 -- CPU registers and busses
 	
 	signal PC 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- program counter
+	signal cmd 		: STD_LOGIC_VECTOR (7 downto 0) := x"05"; 	-- current operation command
 	signal A 		: STD_LOGIC_VECTOR (7 downto 0) := x"0a"; 	-- A BUS
 	signal B 		: STD_LOGIC_VECTOR (7 downto 0) := x"03"; 	-- B BUS
 	signal C 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- C BUS
-	signal cmd 		: STD_LOGIC_VECTOR (7 downto 0) := x"05"; 	-- current operation command
+	
+-- general purpose registers
+	type reg_type is array (0 to 3) of STD_LOGIC_VECTOR (7 downto 0);
+	signal REG : reg_type := (x"00", x"00", x"00", x"00");
+	
+-- register control signals
+	signal AddressA 	: STD_LOGIC_VECTOR (1 downto 0);
+	signal AddressB 	: STD_LOGIC_VECTOR (1 downto 0);
+	signal AddressC 	: STD_LOGIC_VECTOR (1 downto 0);
+
 	
 begin
+
+
+-- register multiplexer
+
+-- A 
+with AddressA select
+	A <= 	REG(0) 	when "00",
+			REG(1) 	when "01",
+			REG(2) 	when "10",
+			REG(3) 	when "11",
+			"ZZZZZZZZ" 	when others; 
+-- B
+with AddressB select
+	B <= 	REG(0) 	when "00",
+			REG(1) 	when "01",
+			REG(2) 	when "10",
+			REG(3) 	when "11",
+			"ZZZZZZZZ" 	when others; 
+-- C
+with AddressC select
+	C <= 	REG(0) 	when "00",
+			REG(1) 	when "01",
+			REG(2) 	when "10",
+			REG(3) 	when "11",
+			"ZZZZZZZZ" 	when others; 
+
 
 -- connect output to LEDs
 LED <= C;
 
 
--- connect cmd til PROG
--- cmd <= PROG(conv_integer(PC));
+
 
 
 -- ALU controller
@@ -82,6 +118,7 @@ ALUController : entity work.ALUController
 		FUNC 		=> cmd,
 		OUTPUT 	=> ALUControlBus
 	);
+
 
 -- ALU mapping
 ALU : entity work.EightBitALU
@@ -98,6 +135,39 @@ ALU : entity work.EightBitALU
 		CARRY		=> ALUcarry
 	);
 
+
+
+-- connect cmd til PROG
+cmd <= PROG(conv_integer(PC));
+
+process (CLK)
+begin
+	if rising_edge(CLK) then
+		PC <= PC + 1;
+	end if;
+end process;
+
+process (cmd)
+begin
+	case (cmd) is
+		when x"00" => -- NOP
+			ALUfunc <= x"00";
+			AddressA <= "ZZ";
+			AddressB <= "ZZ";
+			AddressC <= "ZZ";
+		when x"01" => -- LDA
+			ALUfunc <= x"01";
+			AddressA <= "ZZ";
+			AddressB <= "ZZ";
+			A <= PROG(conv_integer(PC + 2));
+			AddressC <= PROG(conv_integer(PC + 1));
+		when others => -- NOP
+			ALUfunc <= x"00";
+			AddressA <= "ZZ";
+			AddressB <= "ZZ";
+			AddressC <= "ZZ";
+	end case;
+end process;
 
 
 

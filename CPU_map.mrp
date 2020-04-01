@@ -10,7 +10,7 @@ Target Device  : xc6slx9
 Target Package : tqg144
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Fri Mar 27 12:23:28 2020
+Mapped Date    : Fri Mar 27 14:06:54 2020
 
 Design Summary
 --------------
@@ -51,8 +51,8 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Peak Memory Usage:  4502 MB
-Total REAL time to MAP completion:  3 secs 
+Peak Memory Usage:  4503 MB
+Total REAL time to MAP completion:  4 secs 
 Total CPU time to MAP completion:   3 secs 
 
 Table of Contents
@@ -94,7 +94,7 @@ INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-   2 block(s) optimized away
+   1 block(s) optimized away
 
 Section 5 - Removed Logic
 -------------------------
@@ -102,7 +102,6 @@ Section 5 - Removed Logic
 Optimized Block(s):
 TYPE 		BLOCK
 GND 		XST_GND
-VCC 		XST_VCC
 
 Section 6 - IOB Properties
 --------------------------
