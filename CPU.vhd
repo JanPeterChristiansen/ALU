@@ -42,7 +42,7 @@ architecture Behavioral of CPU is
 -- program memory
 
 	type ram_type is array (0 to 63) of STD_LOGIC_VECTOR (7 downto 0);
-	signal PROG : ram_type := (X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
+	signal PROG : ram_type := (X"01", X"00", X"03", X"00", X"00", X"00", X"00", X"00",
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
@@ -54,17 +54,18 @@ architecture Behavioral of CPU is
 
 -- ALU control signals
 
-	signal ALUControlBus : STD_LOGIC_VECTOR (5 downto 0) := "000000";
-	signal ALUfunc			: STD_LOGIC_VECTOR (7 downto 0) := x"00";
-	signal ALUcarry		: STD_LOGIC;
+	signal ALUControlBus 		: STD_LOGIC_VECTOR (5 downto 0) := "000000";
+	signal ALUfunc					: STD_LOGIC_VECTOR (7 downto 0) := x"00";
+	signal ALUOutputRegister 	: STD_LOGIC_VECTOR (7 downto 0) := x"00";
+	signal ALUcarry				: STD_LOGIC := '0';
 	
 	
 -- CPU registers and busses
 	
 	signal PC 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- program counter
-	signal cmd 		: STD_LOGIC_VECTOR (7 downto 0) := x"05"; 	-- current operation command
-	signal A 		: STD_LOGIC_VECTOR (7 downto 0) := x"0a"; 	-- A BUS
-	signal B 		: STD_LOGIC_VECTOR (7 downto 0) := x"03"; 	-- B BUS
+	signal cmd 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- current operation command
+	signal A 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- A BUS
+	signal B 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- B BUS
 	signal C 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- C BUS
 	
 -- general purpose registers
@@ -72,9 +73,9 @@ architecture Behavioral of CPU is
 	signal REG : reg_type := (x"00", x"00", x"00", x"00");
 	
 -- register control signals
-	signal AddressA 	: STD_LOGIC_VECTOR (1 downto 0);
-	signal AddressB 	: STD_LOGIC_VECTOR (1 downto 0);
-	signal AddressC 	: STD_LOGIC_VECTOR (1 downto 0);
+	signal AddressA 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
+	signal AddressB 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
+	signal AddressC 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
 
 	
 begin
@@ -96,26 +97,25 @@ with AddressB select
 			REG(2) 	when "10",
 			REG(3) 	when "11",
 			"ZZZZZZZZ" 	when others; 
--- C
-with AddressC select
-	C <= 	REG(0) 	when "00",
-			REG(1) 	when "01",
-			REG(2) 	when "10",
-			REG(3) 	when "11",
-			"ZZZZZZZZ" 	when others; 
+-- C 
+REG(0) <= C when AddressC = "00" else "ZZZZZZZZ";
+REG(1) <= C when AddressC = "01" else "ZZZZZZZZ";
+REG(2) <= C when AddressC = "10" else "ZZZZZZZZ";
+REG(3) <= C when AddressC = "11" else "ZZZZZZZZ";
 
 
 -- connect output to LEDs
 LED <= C;
 
+-- connect ALU output to C bus
+C <= ALUOutputRegister;
 
 
 
-
--- ALU controller
+-- ALU function decoder
 ALUController : entity work.ALUController
 	Port Map(
-		FUNC 		=> cmd,
+		FUNC 		=> ALUfunc,
 		OUTPUT 	=> ALUControlBus
 	);
 
@@ -129,9 +129,9 @@ ALU : entity work.EightBitALU
       ENA		=> ALUControlBus(3),
 		ENB		=> ALUControlBus(2),
 		INC 		=> ALUControlBus(0),
-		F(0)		=> ALUControlBus(5),
-		F(1)		=> ALUControlBus(4),
-		OUTPUT	=> C,
+		F(0)		=> ALUControlBus(4),
+		F(1)		=> ALUControlBus(5),
+		OUTPUT	=> ALUOutputRegister,
 		CARRY		=> ALUcarry
 	);
 
@@ -147,7 +147,7 @@ begin
 	end if;
 end process;
 
-process (cmd)
+process (cmd,PROG,PC)
 begin
 	case (cmd) is
 		when x"00" => -- NOP
@@ -155,12 +155,14 @@ begin
 			AddressA <= "ZZ";
 			AddressB <= "ZZ";
 			AddressC <= "ZZ";
-		when x"01" => -- LDA
+		when x"01" => -- LDAi
 			ALUfunc <= x"01";
 			AddressA <= "ZZ";
 			AddressB <= "ZZ";
 			A <= PROG(conv_integer(PC + 2));
-			AddressC <= PROG(conv_integer(PC + 1));
+			B <= x"00";
+			AddressC <= PROG(conv_integer(PC + 1))(1 downto 0);
+			PC <= PC + 2;
 		when others => -- NOP
 			ALUfunc <= x"00";
 			AddressA <= "ZZ";

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2020-03-27T13:09:54</DateModified>
+  <DateModified>2020-04-06T13:44:43</DateModified>
   <ModuleName>CPU</ModuleName>
   <SummaryTimeStamp>2020-03-27T10:53:09</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/japem/Documents/VHDL/MicroArchitecture/iseconfig/CPU.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/japem/Documents/VHDL/MicroArchitecture\</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Users/japem/Documents/repos/VHDL/ALU/iseconfig/CPU.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/japem/Documents/repos/VHDL/ALU\</ImplementationReportsDirectory>
   <DateInitialized>2020-03-26T13:25:05</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
