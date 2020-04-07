@@ -50,10 +50,8 @@ architecture Behavioral of CPU is
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00",
 										X"00", X"00", X"00", X"00", X"00", X"00", X"00", X"00");
-										
 
 -- ALU control signals
-
 	signal ALUControlBus 		: STD_LOGIC_VECTOR (5 downto 0) := "000000";
 	signal ALUfunc					: STD_LOGIC_VECTOR (7 downto 0) := x"00";
 	signal ALUOutputRegister 	: STD_LOGIC_VECTOR (7 downto 0) := x"00";
@@ -61,55 +59,26 @@ architecture Behavioral of CPU is
 	
 	
 -- CPU registers and busses
-	
 	signal PC 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- program counter
 	signal cmd 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- current operation command
 	signal A 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- A BUS
 	signal B 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- B BUS
 	signal C 		: STD_LOGIC_VECTOR (7 downto 0) := x"00"; 	-- C BUS
 	
--- general purpose registers
-	type reg_type is array (0 to 3) of STD_LOGIC_VECTOR (7 downto 0);
-	signal REG : reg_type := (x"00", x"00", x"00", x"00");
 	
 -- register control signals
 	signal AddressA 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
 	signal AddressB 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
-	signal AddressC 	: STD_LOGIC_VECTOR (1 downto 0) := "ZZ";
+	signal RegisterReadEnable : STD_LOGIC_VECTOR (1 downto 0) := "00";
+	signal RegisterWriteEnable: STD_LOGIC_VECTOR (1 downto 0) := "00;
+	
+
 
 	
 begin
 
-
--- register multiplexer
-
--- A 
-with AddressA select
-	A <= 	REG(0) 	when "00",
-			REG(1) 	when "01",
-			REG(2) 	when "10",
-			REG(3) 	when "11",
-			"ZZZZZZZZ" 	when others; 
--- B
-with AddressB select
-	B <= 	REG(0) 	when "00",
-			REG(1) 	when "01",
-			REG(2) 	when "10",
-			REG(3) 	when "11",
-			"ZZZZZZZZ" 	when others; 
--- C 
-REG(0) <= C when AddressC = "00" else "ZZZZZZZZ";
-REG(1) <= C when AddressC = "01" else "ZZZZZZZZ";
-REG(2) <= C when AddressC = "10" else "ZZZZZZZZ";
-REG(3) <= C when AddressC = "11" else "ZZZZZZZZ";
-
-
 -- connect output to LEDs
 LED <= C;
-
--- connect ALU output to C bus
-C <= ALUOutputRegister;
-
 
 
 -- ALU function decoder
@@ -118,7 +87,6 @@ ALUController : entity work.ALUController
 		FUNC 		=> ALUfunc,
 		OUTPUT 	=> ALUControlBus
 	);
-
 
 -- ALU mapping
 ALU : entity work.EightBitALU
@@ -131,14 +99,30 @@ ALU : entity work.EightBitALU
 		INC 		=> ALUControlBus(0),
 		F(0)		=> ALUControlBus(4),
 		F(1)		=> ALUControlBus(5),
-		OUTPUT	=> ALUOutputRegister,
+		OUTPUT	=> C,
 		CARRY		=> ALUcarry
+	);
+
+
+-- Registers
+REGISTERS : entity work.Registers
+	Port Map(
+		clk => CLK,
+		addrA => AddressA,
+		addrB => AddressB,
+		input => C,
+		RE => RegisterReadEnable,
+		WE => RegisterWriteEnable,
+		busA => A,
+		busB => B,
 	);
 
 
 
 -- connect cmd til PROG
 cmd <= PROG(conv_integer(PC));
+
+
 
 process (CLK)
 begin
@@ -147,14 +131,16 @@ begin
 	end if;
 end process;
 
-process (cmd,PROG,PC)
+
+
+
+process (cmd)
 begin
 	case (cmd) is
 		when x"00" => -- NOP
 			ALUfunc <= x"00";
 			AddressA <= "ZZ";
 			AddressB <= "ZZ";
-			AddressC <= "ZZ";
 		when x"01" => -- LDAi
 			ALUfunc <= x"01";
 			AddressA <= "ZZ";

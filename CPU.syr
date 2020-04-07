@@ -10,7 +10,7 @@ Total CPU time to Xst completion: 0.10 secs
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.11 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> Reading design: CPU.prj
 
@@ -142,7 +142,11 @@ WARNING:HDLCompiler:634 - "C:\Users\japem\Documents\repos\VHDL\ALU\Adder.vhd" Li
 WARNING:HDLCompiler:634 - "C:\Users\japem\Documents\repos\VHDL\ALU\Adder.vhd" Line 47: Net <tempINC[8]> does not have a driver.
 
 Elaborating entity <OutputSelect> (architecture <Behavioral>) from library <work>.
-ERROR:HDLCompiler:1401 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 150: Signal PC[7] in unit CPU is connected to following multiple drivers:
+WARNING:HDLCompiler:92 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 132: prog should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 134: prog should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 135: pc should be on the sensitivity list of the process
+WARNING:HDLCompiler:1127 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 120: Assignment to addressa ignored, since the identifier is never used
+ERROR:HDLCompiler:1401 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 120: Signal PC[7] in unit CPU is connected to following multiple drivers:
 Driver 0: output signal PC[7] of instance Flip-flop (PC).
 Driver 1: output signal PC[7] of instance Latch (PC[7]).
 Driver 0: output signal PC[6] of instance Flip-flop (PC).
@@ -159,45 +163,11 @@ Driver 0: output signal PC[1] of instance Flip-flop (PC).
 Driver 1: output signal PC[1] of instance Latch (PC[1]).
 Driver 0: output signal PC[0] of instance Flip-flop (PC).
 Driver 1: output signal PC[0] of instance Latch (PC[0]).
-ERROR:HDLCompiler:1401 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 87: Signal A[7] in unit CPU is connected to following multiple drivers:
-Driver 0: output signal A[7] of instance Latch (A[7]).
-Driver 1: output signal A[7] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[6] of instance Latch (A[6]).
-Driver 1: output signal A[6] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[5] of instance Latch (A[5]).
-Driver 1: output signal A[5] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[4] of instance Latch (A[4]).
-Driver 1: output signal A[4] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[3] of instance Latch (A[3]).
-Driver 1: output signal A[3] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[2] of instance Latch (A[2]).
-Driver 1: output signal A[2] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[1] of instance Latch (A[1]).
-Driver 1: output signal A[1] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-Driver 0: output signal A[0] of instance Latch (A[0]).
-Driver 1: output signal A[0] of instance AddressA[1]_REG[3][7]_wide_mux_0 (AddressA[1]_REG[3][7]_wide_mux_0).
-ERROR:HDLCompiler:1401 - "C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 94: Signal B[7] in unit CPU is connected to following multiple drivers:
-Driver 0: output signal B[7] of instance Latch (B[7]).
-Driver 1: output signal B[7] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[6] of instance Latch (B[6]).
-Driver 1: output signal B[6] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[5] of instance Latch (B[5]).
-Driver 1: output signal B[5] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[4] of instance Latch (B[4]).
-Driver 1: output signal B[4] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[3] of instance Latch (B[3]).
-Driver 1: output signal B[3] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[2] of instance Latch (B[2]).
-Driver 1: output signal B[2] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[1] of instance Latch (B[1]).
-Driver 1: output signal B[1] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
-Driver 0: output signal B[0] of instance Latch (B[0]).
-Driver 1: output signal B[0] of instance AddressB[1]_REG[3][7]_wide_mux_1 (AddressB[1]_REG[3][7]_wide_mux_1).
 --> 
 
 Total memory usage is 4474868 kilobytes
 
-Number of errors   :    3 (   0 filtered)
-Number of warnings :    3 (   0 filtered)
+Number of errors   :    1 (   0 filtered)
+Number of warnings :    7 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

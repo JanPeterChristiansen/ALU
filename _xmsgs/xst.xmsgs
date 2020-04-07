@@ -14,13 +14,19 @@
 <msg type="warning" file="HDLCompiler" num="634" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\Adder.vhd" Line 47: Net &lt;<arg fmt="%s" index="1">tempINC[8]</arg>&gt; does not have a driver.
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1401" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 150: Signal <arg fmt="%s" index="1">PC[7]</arg> in unit <arg fmt="%s" index="2">CPU</arg> is connected to following multiple drivers:
+<msg type="warning" file="HDLCompiler" num="92" delta="new" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 132: <arg fmt="%s" index="1">prog</arg> should be on the sensitivity list of the process
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1401" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 87: Signal <arg fmt="%s" index="1">A[7]</arg> in unit <arg fmt="%s" index="2">CPU</arg> is connected to following multiple drivers:
+<msg type="warning" file="HDLCompiler" num="92" delta="new" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 134: <arg fmt="%s" index="1">prog</arg> should be on the sensitivity list of the process
 </msg>
 
-<msg type="error" file="HDLCompiler" num="1401" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 94: Signal <arg fmt="%s" index="1">B[7]</arg> in unit <arg fmt="%s" index="2">CPU</arg> is connected to following multiple drivers:
+<msg type="warning" file="HDLCompiler" num="92" delta="new" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 135: <arg fmt="%s" index="1">pc</arg> should be on the sensitivity list of the process
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 120: Assignment to <arg fmt="%s" index="1">addressa</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="error" file="HDLCompiler" num="1401" delta="old" >"C:\Users\japem\Documents\repos\VHDL\ALU\CPU.vhd" Line 120: Signal <arg fmt="%s" index="1">PC[7]</arg> in unit <arg fmt="%s" index="2">CPU</arg> is connected to following multiple drivers:
 </msg>
 
 </messages>
